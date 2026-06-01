@@ -1,5 +1,9 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import {
+  showSuccess,
+  showError
+} from '@/lib/toast'
 
 import {
   getRepuestos,
@@ -15,6 +19,45 @@ export const useRepuestosStore = defineStore(
     const repuestos = ref([])
     const loading = ref(false)
     const selectedRepuesto = ref(null)
+
+    const search = ref('')
+
+    const selectedMarca = ref('')
+
+    const selectedCategoria = ref('')
+
+    const filteredRepuestos = computed(() => {
+
+      return repuestos.value.filter(item => {
+
+        const matchesSearch =
+          !search.value ||
+
+          item.nombre
+            .toLowerCase()
+            .includes(
+              search.value.toLowerCase()
+            )
+
+        const matchesMarca =
+          !selectedMarca.value ||
+
+          item.marca ===
+          selectedMarca.value
+
+        const matchesCategoria =
+          !selectedCategoria.value ||
+
+          item.categoria ===
+          selectedCategoria.value
+
+        return (
+          matchesSearch &&
+          matchesMarca &&
+          matchesCategoria
+        )
+      })
+    })
 
     async function fetchRepuestos() {
 
@@ -35,6 +78,10 @@ export const useRepuestosStore = defineStore(
 
     function setSelectedRepuesto(repuesto) {
       selectedRepuesto.value = repuesto
+    }
+
+    function clearSelectedRepuesto() {
+      selectedRepuesto.value = null
     }
 
     async function addRepuesto(payload) {
@@ -61,6 +108,8 @@ export const useRepuestosStore = defineStore(
       if (index !== -1) {
         repuestos.value[index] = data
       }
+
+      return data
     }
 
     async function removeRepuesto(id) {
@@ -68,12 +117,23 @@ export const useRepuestosStore = defineStore(
       const { error } =
         await deleteRepuesto(id)
 
-      if (error) throw error
+      if (error) {
+
+        showError(
+          error.message
+        )
+
+        throw error
+      }
 
       repuestos.value =
         repuestos.value.filter(
           item => item.id !== id
         )
+
+      showSuccess(
+        'Repuesto eliminado correctamente'
+      )
     }
 
     return {
@@ -84,7 +144,12 @@ export const useRepuestosStore = defineStore(
       editRepuesto,
       removeRepuesto,
       selectedRepuesto,
-      setSelectedRepuesto
+      setSelectedRepuesto,
+      clearSelectedRepuesto,
+      search,
+      selectedMarca,
+      selectedCategoria,
+      filteredRepuestos
     }
   }
 )

@@ -1,0 +1,297 @@
+@import "tailwindcss";
+
+.admin-card {
+  @apply
+    bg-white
+    rounded-2xl sm:rounded-3xl
+    border
+    border-slate-200
+    shadow-sm;
+}
+
+.admin-section-title {
+  @apply
+    text-xs
+    uppercase
+    tracking-wider
+    text-slate-400
+    font-semibold
+    mb-3 sm:mb-4
+    px-3;
+}
+
+.admin-nav-item {
+  @apply
+    flex
+    items-center
+    gap-3
+    px-3 sm:px-4
+    py-2 sm:py-3
+    rounded-lg sm:rounded-xl
+    text-slate-600
+    transition-all
+    text-xs sm:text-base;
+}
+
+.admin-nav-item:hover {
+  @apply bg-slate-100;
+}
+
+.router-link-active.admin-nav-item {
+  @apply
+    bg-blue-50
+    text-blue-600
+    font-semibold;
+}
+
+.admin-search-input {
+  @apply
+    w-full
+    h-9 sm:h-10 md:h-12
+    rounded-xl sm:rounded-2xl
+    border
+    border-slate-200
+    pl-10 sm:pl-12
+    pr-4
+    bg-slate-50
+    outline-none
+    transition-all
+    text-sm;
+}
+
+.admin-search-input:focus {
+  @apply border-blue-400 bg-white;
+}
+
+.admin-top-icon {
+  @apply
+    w-9 sm:w-10
+    h-9 sm:h-10
+    rounded-lg sm:rounded-xl
+    hover:bg-slate-100
+    flex
+    items-center
+    justify-center
+    transition;
+}
+
+.admin-logout-btn {
+  @apply
+    w-full
+    h-10 sm:h-12
+    rounded-lg sm:rounded-xl
+    border
+    border-slate-200
+    flex
+    items-center
+    justify-center
+    gap-2
+    hover:bg-red-50
+    hover:text-red-600
+    transition
+    text-sm sm:text-base;
+}
+
+.admin-logout-btn-collapsed {
+  @apply
+    w-10 sm:w-12
+    h-10 sm:h-12
+    mx-auto
+    rounded-lg sm:rounded-xl
+    border
+    border-slate-200
+    flex
+    items-center
+    justify-center;
+}
+
+.admin-nav-item-collapsed {
+  @apply justify-center px-0;
+}
+
+.tooltip-container {
+  position: relative;
+}
+
+.tooltip-content {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  margin-left: 12px;
+
+  background: #0f172a;
+
+  color: white;
+
+  padding: 6px 10px;
+
+  border-radius: 8px;
+
+  font-size: 12px;
+
+  white-space: nowrap;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  transition: all .2s ease;
+
+  z-index: 50;
+}
+
+.tooltip-container:hover .tooltip-content {
+  opacity: 1;
+  visibility: visible;
+}
+
+.admin-stat-card {
+  @apply
+    bg-white
+    rounded-2xl
+    p-4 sm:p-6
+    border
+    border-slate-200
+    flex
+    flex-col sm:flex-row
+    items-center
+    gap-3 sm:gap-4
+    shadow-sm;
+}
+
+.admin-stat-icon {
+  @apply
+    w-12 sm:w-14
+    h-12 sm:h-14
+    rounded-xl sm:rounded-2xl
+    flex
+    items-center
+    justify-center
+    flex-shrink-0;
+}
+
+.admin-stat-label {
+  @apply
+    text-xs sm:text-sm
+    text-slate-500;
+}
+
+.admin-stat-value {
+  @apply
+    text-2xl sm:text-3xl
+    font-bold
+    text-slate-900;
+}
+
+/* Responsive adjustments for filters */
+.admin-filters {
+  @apply
+    flex
+    flex-col sm:flex-row
+    gap-2 sm:gap-3
+    flex-wrap;
+}
+
+/* Table responsive fixes */
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+table th,
+table td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 1024px) {
+  table th,
+  table td {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 900px) {
+  table th,
+  table td {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .admin-card {
+    @apply rounded-2xl;
+  }
+
+  .admin-stat-card {
+    @apply gap-3 p-4;
+  }
+
+  .admin-stat-value {
+    @apply text-xl;
+  }
+
+  .admin-logout-btn {
+    @apply h-9;
+  }
+
+  .tooltip-content {
+    font-size: 11px;
+    padding: 5px 8px;
+  }
+}
+
+.input {
+  @apply w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500;
+}
+
+.label {
+  @apply block mb-2 text-sm font-medium text-slate-700;
+}
+
+.card {
+  @apply border border-slate-200 rounded-2xl bg-slate-50 p-4;
+}
+
+.tag {
+  @apply bg-white border border-slate-200 rounded-full px-3 py-1.5 text-sm flex items-center;
+}
+
+.btn-primary {
+  @apply px-5 py-3 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700;
+}
+
+.btn-dark {
+  @apply px-4 py-2.5 rounded-xl bg-slate-900 text-white;
+}
+
+.btn-outline {
+  @apply px-5 py-3 rounded-xl border border-slate-300 hover:bg-slate-100;
+}
+
+.check-card {
+  @apply flex items-center gap-3 border border-slate-200 rounded-xl p-4 cursor-pointer hover:bg-slate-50;
+}
+
+.dropzone {
+  @apply border-2 border-dashed border-slate-300 rounded-2xl p-8 text-center bg-slate-50;
+}
+
+.preview {
+  @apply mt-6 w-44 h-44 object-cover rounded-2xl border mx-auto;
+}
+
+.actions {
+  @apply flex justify-end gap-3 pt-4;
+}
+
+.error {
+  @apply text-red-500 text-sm mt-1;
+}

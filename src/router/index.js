@@ -18,18 +18,22 @@ const routes = [
   {
     path: "/admin",
     component: () =>
-      import("@/views/DashboardView.vue"),
+      import("@/layouts/AdminLayout.vue"),
     meta: {
       requiresAuth: true
-    }
-  },
-  {
-    path: '/admin/repuestos',
-    component: () =>
-      import('@/views/RepuestosView.vue'),
-    meta: {
-      requiresAuth: true
-    }
+    },
+    children: [
+      {
+        path: "",
+        component: () =>
+          import("@/views/RepuestosView.vue")
+      },
+      {
+        path: "repuestos",
+        component: () =>
+          import("@/views/RepuestosView.vue")
+      },
+    ]
   },
 ];
 
